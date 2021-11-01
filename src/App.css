@@ -2,6 +2,28 @@
   text-align: center;
 }
 
+.topbar{
+background-color: lightblue;
+display: flex;
+flex-direction: row;
+}
+
+.table{
+  border-radius: 10;
+  border-width: 10;
+}
+
+.navbar{
+  background-color: lightcyan;
+  display: flex;
+  flex-direction: column;
+  width: 50;
+  height: 40;
+  justify-content: space-between;
+  margin:10;
+}
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
