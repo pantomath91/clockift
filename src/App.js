@@ -1,44 +1,28 @@
-import React,{useState} from 'react';
+import React from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Projects from './components/MainComponents/Projects';
 import './App.css';
-import ProjectList from './components/Project_list';
-import Timer from './components/Timer';
-
+import Graph
+  from './components/AppLevelComponents/Graph';
+import Home from './components/AppLevelComponents/Home';
+import NavBar from './components/AppLevelComponents/NavBar';
 
 function App() {
-  const [inputValue, setInputValue]=useState('');
-  const [project, setProject]= useState([]);
-  
-  let addProject = (event)=> {
-    console.log('Enter value is',event.target.value);
-    project.push(event.target.value)
-    setProject(project);
-  }
-
-  let enteredInputValue = (value)=>{
-   setInputValue(value);
-  }
-
-  return (
-    <div>
-        <div className='topbar'>
-          <div style={{marginRight:20}}>FilterIcon</div>
-          <div>Clockify</div>
-        </div>
-        <div style={{display:'flex', flexDirection:'row'}}>
-          <div className='navbar'>
-            <div style={{ marginBottom: 10}}>PROJECTS</div>
-            <div style={{ marginBottom: 10}}>DASHBOARD</div>
-            <div style={{ marginBottom: 10}}>REPORTS</div>
-          </div>
-          <div className='displayContent'>
-            <input type='text' placeholder='Enter your project name' onChange={(event)=> enteredInputValue(event.target.value)}/>
-            <button onClick={(event)=>addProject(event)} value={inputValue}>New Project</button>
-            <ProjectList project={project}inputValue={inputValue} setProject={setProject}/>
-            <Timer />
-          </div>
-        </div>
-    </div>
-  );
+  return (<>
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Projects />} />
+        <Route path="/graph" element={<Graph />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  </>
+  )
 }
 
 export default App;
