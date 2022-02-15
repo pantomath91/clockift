@@ -1,28 +1,31 @@
-import React from 'react'
+import React, { useState, useRef } from "react";
 
-export default function Timer(props) {
-    var value = props.value;
-    const start = ()=>{
-        setInterval(()=> {
-            value++;
-            console.log(value);
-          }, 1000);
-    }
+export default function Timer() {
+  const [count, setCount] = useState(0);
+  const interval = useRef(null);
 
-    const resume = ()=>{
-        clearInterval(start);
-    }
+  const startTimer = () => {
+    interval.current = setInterval(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+  };
 
-    const stop = ()=>{
-        value=0;
-    }
-    
-    return (
-        <div>
-            <div>{value}</div>
-            <button onClick={start}>Start</button>
-            <button onClick={resume}>Resume</button>
-            <button onClick={stop}>Stop</button>
-        </div>
-    )
+  const resetTimer = () => {
+    clearInterval(interval);
+    setCount(0);
+  };
+
+  const stopTimer = () => {
+    clearInterval(interval.current);
+  };
+
+  return (
+    <div>
+      <div>{count}</div>
+      <button onClick={startTimer}>Start</button>
+      <button onClick={resetTimer}>ResetTimer</button>
+      <button onClick={startTimer}>ResumeTimer</button>
+      <button onClick={stopTimer}>Stop</button>
+    </div>
+  );
 }
